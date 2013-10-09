@@ -66,11 +66,18 @@ def length[A](xs:List[A]):Int = {
   }
 }
 
+def zip[A, B](xs:List[A], ys:List[B]):List[(A, B)] = {
+  xs match{
+    case Empty() => Empty()
+    case Cons(h, t) => Cons((h, ys.head), zip(t, ys.tail))
+  }
+}
 val list1 = Cons(1, Cons(2, Cons(3, Empty())))
 val list2 = Cons(4, Cons(5, Cons(6, Empty())))
 map(list1, (x:Int) => x * x)
 filter(list2, (x:Int) => x > 4)
 fold(list2, 1, (acc:Int, n:Int) => acc * n)
-
 range(1, 5)
 length(range(1,5))
+
+zip(list1, list2)
