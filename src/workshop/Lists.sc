@@ -53,6 +53,12 @@ def range(from:Int, to:Int):List[Int] = {
   else Cons(from, range(from + 1, to))
 }
 
+def length[A](xs:List[A]):Int = {
+  xs match{
+    case Empty() => 0
+    case Cons(h, t) => 1 + length(t)
+  }
+}
 val list1 = Cons(1, Cons(2, Cons(3, Empty())))
 val list2 = Cons(4, Cons(5, Cons(6, Empty())))
 map(list1, (x:Int) => x * x)
@@ -60,3 +66,4 @@ filter(list2, (x:Int) => x > 4)
 fold(list2, 1, (acc:Int, n:Int) => acc * n)
 
 range(1, 5)
+length(range(1,5))
