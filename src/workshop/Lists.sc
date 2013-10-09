@@ -48,9 +48,15 @@ def filter[A](xs:List[A], f:A => Boolean):List[A] = {
     case _ => Empty()
   })
 }
+
+def generate[A, B](seed:A, condition:A => Boolean, iterate:A => A, result: A => B):List[B] = {
+  if(!condition(seed)) Empty()
+  else Cons(result(seed), generate(iterate(seed), condition, iterate, result))
+}
+
+
 def range(from:Int, to:Int):List[Int] = {
-  if(from == to) Cons(from, Empty())
-  else Cons(from, range(from + 1, to))
+  generate(1, (n:Int) => n <= 5, (n:Int) => n + 1, (n:Int) => n)
 }
 
 def length[A](xs:List[A]):Int = {
@@ -59,6 +65,7 @@ def length[A](xs:List[A]):Int = {
     case Cons(h, t) => 1 + length(t)
   }
 }
+
 val list1 = Cons(1, Cons(2, Cons(3, Empty())))
 val list2 = Cons(4, Cons(5, Cons(6, Empty())))
 map(list1, (x:Int) => x * x)
