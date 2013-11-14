@@ -13,5 +13,7 @@ project/plugins/project/
 .scala_dependencies
 
 #IntelliJ
-.idea/
 out/
+.iws
+workspace.xml
+tasks.xml
